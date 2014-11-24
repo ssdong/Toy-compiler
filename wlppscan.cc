@@ -29,37 +29,37 @@ using namespace std;
 
 enum Kind {
     ID,                 // A string consisting of a letter followed by zero or more letters and digits
-	ZERO,               // 0
+    ZERO,               // 0
     NUM,                // integer
     LPAREN,             // (
     RPAREN,             // )
-	LBRACE,             // {
-	RBRACE,             // }
-	INT,                // type int
-	BECOMES,            // "="
-	BANG,               // "!"
-	EQ,                 // "=="
-	NE,                 // "!="
-	LT,                 // "<"
-	GT,                 // ">"
-	LE,                 // "<="
-	GE,                 // ">="
-	PLUS,               // "+"
-	MINUS,              // "-"
-	STAR,               // "*"
-	SLASH,              // "/"
-	PCT,                // "%"
-	COMMA,              // ","
-	SEMI,               // ";"
-	LBRACK,             // "["
-	RBRACK,             // "]"
-	AMP,                // "&"
-	NUL,                // "NULL"
-	TAB,                // \t
-	NEWLINE,            // \n
-	COMMENT,            // //
-	WHITESPACE,         // \s
-	INVALID,            //  
+    LBRACE,             // {
+    RBRACE,             // }
+    INT,                // type int
+    BECOMES,            // "="
+    BANG,               // "!"
+    EQ,                 // "=="
+    NE,                 // "!="
+    LT,                 // "<"
+    GT,                 // ">"
+    LE,                 // "<="
+    GE,                 // ">="
+    PLUS,               // "+"
+    MINUS,              // "-"
+    STAR,               // "*"
+    SLASH,              // "/"
+    PCT,                // "%"
+    COMMA,              // ","
+    SEMI,               // ";"
+    LBRACK,             // "["
+    RBRACK,             // "]"
+    AMP,                // "&"
+    NUL,                // "NULL"
+    TAB,                // \t
+    NEWLINE,            // \n
+    COMMENT,            // //
+    WHITESPACE,         // \s
+    INVALID,            //  
 };
 
 // kindString(k) returns string a representation of kind k
@@ -83,36 +83,36 @@ vector<Token> scan(string input);
 // States for the finite-state automaton that comprises the scanner.
 
 enum State {
-	ST_NUL,
+    ST_NUL,
     ST_START,
-	ST_ZERO,
+    ST_ZERO,
     ST_ID,
-	ST_NUM,
-	ST_LPAREN,
+    ST_NUM,
+    ST_LPAREN,
     ST_RPAREN,
-	ST_LBRACE,
-	ST_RBRACE,
-	ST_BECOMES,
-	ST_BANG,
-	ST_INT,
+    ST_LBRACE,
+    ST_RBRACE,
+    ST_BECOMES,
+    ST_BANG,
+    ST_INT,
     ST_EQ,
-	ST_NE,
-	ST_LT,
-	ST_GT,
-	ST_LE,
-	ST_GE,
-	ST_PLUS,
-	ST_MINUS,
-	ST_STAR,
-	ST_SLASH,
-	ST_PCT,
+    ST_NE,
+    ST_LT,
+    ST_GT,
+    ST_LE,
+    ST_GE,
+    ST_PLUS,
+    ST_MINUS,
+    ST_STAR,
+    ST_SLASH,
+    ST_PCT,
     ST_COMMA,
     ST_SEMI,
-	ST_LBRACK,
-	ST_RBRACK,
-	ST_AMP,
-	ST_INVALID,
-	ST_COMMENT,
+    ST_LBRACK,
+    ST_RBRACK,
+    ST_AMP,
+    ST_INVALID,
+    ST_COMMENT,
     ST_WHITESPACE,
 };
 
@@ -121,37 +121,37 @@ enum State {
 // a token have stateKinds == NUL.
 
 Kind stateKinds[] = {
-	NUL,       //ST_NUL,
+    NUL,       //ST_NUL,
     NUL,       //ST_START,
-	ZERO,      //ST_ZERO,
+    ZERO,      //ST_ZERO,
     ID,        //ST_ID,
-    NUM,	   //ST_NUM,
-	LPAREN,    //ST_LPAREN,
+    NUM,       //ST_NUM,
+    LPAREN,    //ST_LPAREN,
     RPAREN,    //ST_RPAREN,
-	LBRACE,    //ST_LBRACE,
-	RBRACE,    //ST_RBRACE,
-	BECOMES,   //ST_BECOMES,
-	BANG,      //ST_BANG,
-	INT,       //ST_INT,
+    LBRACE,    //ST_LBRACE,
+    RBRACE,    //ST_RBRACE,
+    BECOMES,   //ST_BECOMES,
+    BANG,      //ST_BANG,
+    INT,       //ST_INT,
     EQ,        //ST_EQ,
-	NE,        //ST_NE,
-	LT,        //ST_LT,
-	GT,        //ST_GT,
-	LE,        //ST_LE,
-	GE,        //ST_GE,
-	PLUS,      //ST_PLUS,
-	MINUS,	   //ST_MINUS,
-	STAR,      //ST_STAR,
-	SLASH,     //ST_SLASH,
-	PCT,       //ST_PCT,
+    NE,        //ST_NE,
+    LT,        //ST_LT,
+    GT,        //ST_GT,
+    LE,        //ST_LE,
+    GE,        //ST_GE,
+    PLUS,      //ST_PLUS,
+    MINUS,       //ST_MINUS,
+    STAR,      //ST_STAR,
+    SLASH,     //ST_SLASH,
+    PCT,       //ST_PCT,
     COMMA,     //ST_COMMA,
     SEMI,      //ST_SEMI,
-	LBRACK,    //ST_LBRACK,
-	RBRACK,    //ST_RBRACK,
-	AMP,       //ST_AMP,
-	INVALID,   //ST_INVALID,
-	COMMENT,   //ST_COMMENT,
-	WHITESPACE,//ST_WHITESPACE,
+    LBRACK,    //ST_LBRACK,
+    RBRACK,    //ST_RBRACK,
+    AMP,       //ST_AMP,
+    INVALID,   //ST_INVALID,
+    COMMENT,   //ST_COMMENT,
+    WHITESPACE,//ST_WHITESPACE,
 };
 
 State delta[ST_WHITESPACE+1][256];
@@ -182,38 +182,38 @@ void initT(){
     // NB: in the third line below, letters digits are macros
     // that are replaced by string literals, which the compiler
     // will concatenate into a single string literal.
-	setT( ST_START,      whitespace,     ST_WHITESPACE );
+    setT( ST_START,      whitespace,     ST_WHITESPACE );
     setT( ST_START,      "0",            ST_ZERO       );
-	setT( ST_START,      oneToNine,      ST_NUM        );
-	setT( ST_START,      letters,        ST_ID         );
-	setT( ST_START,      "=",            ST_BECOMES    );
-	setT( ST_START,      "!",            ST_BANG       );
-	setT( ST_START,      "<",            ST_LT         );
-	setT( ST_START,      ">",            ST_GT         );
+    setT( ST_START,      oneToNine,      ST_NUM        );
+    setT( ST_START,      letters,        ST_ID         );
+    setT( ST_START,      "=",            ST_BECOMES    );
+    setT( ST_START,      "!",            ST_BANG       );
+    setT( ST_START,      "<",            ST_LT         );
+    setT( ST_START,      ">",            ST_GT         );
     setT( ST_START,      "+",            ST_PLUS       );
     setT( ST_START,      "-",            ST_MINUS      );
-	setT( ST_START,      "*",            ST_STAR       );
-	setT( ST_START,      "/",            ST_SLASH      );
-	setT( ST_START,      "%",            ST_PCT        );
-	setT( ST_START,      ",",            ST_COMMA      );
-	setT( ST_START,      ";",            ST_SEMI       );
-	setT( ST_START,      "&",            ST_AMP        );
-	setT( ST_START,      "{",            ST_LBRACE     );
-	setT( ST_START,      "}",            ST_RBRACE     );
-	setT( ST_START,      "(",            ST_LPAREN     );
-	setT( ST_START,      ")",            ST_RPAREN     );
-	setT( ST_START,      "[",            ST_LBRACK     );
-	setT( ST_START,      "]",            ST_RBRACK     );
-	setT( ST_SLASH,      "/",            ST_COMMENT    );
-	setT( ST_ZERO,      lettersAndDigits,ST_INVALID    );
-	setT( ST_NUM,       digits,          ST_NUM        );
-	setT( ST_NUM,       letters,         ST_INVALID    );
-	setT( ST_ID,        lettersAndDigits,ST_ID         );
-	setT( ST_BECOMES,   "=",             ST_EQ         );
-	setT( ST_BANG,      "=",             ST_NE         );
-	setT( ST_BANG,      everythingWithoutEQ, ST_INVALID);
-	setT( ST_LT,        "=",             ST_LE         );
-	setT( ST_GT,        "=",             ST_GE         );
+    setT( ST_START,      "*",            ST_STAR       );
+    setT( ST_START,      "/",            ST_SLASH      );
+    setT( ST_START,      "%",            ST_PCT        );
+    setT( ST_START,      ",",            ST_COMMA      );
+    setT( ST_START,      ";",            ST_SEMI       );
+    setT( ST_START,      "&",            ST_AMP        );
+    setT( ST_START,      "{",            ST_LBRACE     );
+    setT( ST_START,      "}",            ST_RBRACE     );
+    setT( ST_START,      "(",            ST_LPAREN     );
+    setT( ST_START,      ")",            ST_RPAREN     );
+    setT( ST_START,      "[",            ST_LBRACK     );
+    setT( ST_START,      "]",            ST_RBRACK     );
+    setT( ST_SLASH,      "/",            ST_COMMENT    );
+    setT( ST_ZERO,      lettersAndDigits,ST_INVALID    );
+    setT( ST_NUM,       digits,          ST_NUM        );
+    setT( ST_NUM,       letters,         ST_INVALID    );
+    setT( ST_ID,        lettersAndDigits,ST_ID         );
+    setT( ST_BECOMES,   "=",             ST_EQ         );
+    setT( ST_BANG,      "=",             ST_NE         );
+    setT( ST_BANG,      everythingWithoutEQ, ST_INVALID);
+    setT( ST_LT,        "=",             ST_LE         );
+    setT( ST_GT,        "=",             ST_GE         );
     setT( ST_WHITESPACE, whitespace,     ST_WHITESPACE );
     for ( j=0; j<256; j++ ) delta[ST_COMMENT][j] = ST_COMMENT;
 }
@@ -221,7 +221,7 @@ void initT(){
 static int initT_done = 0;
 
 vector<Token> scan(string input){
-    // Initialize the transition table when called for the first time.
+    // Initialize the transition table when called for the first time
     if(!initT_done) {
         initT();
         initT_done = 1;
@@ -232,31 +232,31 @@ vector<Token> scan(string input){
     State state = ST_START;
     if(input.length() > 0) {
         while(true) {
-			State nextState = ST_NUL;
-			if(i < input.length()) {
-				nextState = delta[state][(unsigned char) input[i]];
-			}
-			if(nextState == ST_INVALID) {
-				throw(string("ERROR"));
-			}
-			else if(nextState == ST_COMMENT) {
-				break;
-			}
-			else if(nextState == ST_NUL) {
-				if(stateKinds[state] != WHITESPACE) {
-					Token token;
-					token.kind = stateKinds[state];
-					token.lexeme = input.substr(startIndex,i-startIndex);
-					ret.push_back(token);
-				}
-				startIndex = i;
-				state = ST_START;
-				if(i >= input.length()) break;
-			}
-			else {
-				state = nextState;
-				++i;
-			}
+            State nextState = ST_NUL;
+            if(i < input.length()) {
+                nextState = delta[state][(unsigned char) input[i]];
+            }
+            if(nextState == ST_INVALID) {
+                throw(string("ERROR"));
+            }
+            else if(nextState == ST_COMMENT) {
+                break;
+            }
+            else if(nextState == ST_NUL) {
+                if(stateKinds[state] != WHITESPACE) {
+                    Token token;
+                    token.kind = stateKinds[state];
+                    token.lexeme = input.substr(startIndex,i-startIndex);
+                    ret.push_back(token);
+                }
+                startIndex = i;
+                state = ST_START;
+                if(i >= input.length()) break;
+            }
+            else {
+                state = nextState;
+                ++i;
+            }
         }
     }
     return ret;
@@ -267,37 +267,37 @@ vector<Token> scan(string input){
 
 string kS[] = {
     "ID",                 // A string consisting of a letter followed by zero or more letters and digits
-	"NUM",               // 0
+    "NUM",               // 0
     "NUM",                // integer
     "LPAREN",             // (
     "RPAREN",             // )
-	"LBRACE",             // {
-	"RBRACE",             // }
-	"INT",                // type int
-	"BECOMES",            // "="
-	"BANG",               // "!"
-	"EQ",                 // "=="
-	"NE",                 // "!="
-	"LT",                 // "<"
-	"GT",                 // ">"
-	"LE",                 // "<="
-	"GE",                 // ">="
-	"PLUS",               // "+"
-	"MINUS",              // "-"
-	"STAR",               // "*"
-	"SLASH",              // "/"
-	"PCT",                // "%"
-	"COMMA",              // ","
-	"SEMI",               // ";"
-	"LBRACK",             // "["
-	"RBRACK",             // "]"
-	"AMP",                // "&"
-	"NUL",                // "NULL"
-	"TAB",                // \t
-	"NEWLINE",            // \n
-	"COMMENT",            // //
-	"WHITESPACE",         // \s
-	"INVALID",            //  
+    "LBRACE",             // {
+    "RBRACE",             // }
+    "INT",                // type int
+    "BECOMES",            // "="
+    "BANG",               // "!"
+    "EQ",                 // "=="
+    "NE",                 // "!="
+    "LT",                 // "<"
+    "GT",                 // ">"
+    "LE",                 // "<="
+    "GE",                 // ">="
+    "PLUS",               // "+"
+    "MINUS",              // "-"
+    "STAR",               // "*"
+    "SLASH",              // "/"
+    "PCT",                // "%"
+    "COMMA",              // ","
+    "SEMI",               // ";"
+    "LBRACK",             // "["
+    "RBRACK",             // "]"
+    "AMP",                // "&"
+    "NUL",                // "NULL"
+    "TAB",                // \t
+    "NEWLINE",            // \n
+    "COMMENT",            // //
+    "WHITESPACE",         // \s
+    "INVALID",            //  
 };
 
 string kindString( Kind k ){
@@ -335,39 +335,39 @@ int main() {
         for(int line=0; line < tokLines.size(); line++ ) {
             for(int j=0; j < tokLines[line].size(); j++ ) {
                 Token token = tokLines[line][j];
-				if(token.lexeme == "return") {
-					cout << "RETURN return" << endl;
-				}
-				else if(token.lexeme == "if") {
-					cout << "IF if" << endl;
-				}
-				else if(token.lexeme == "else") {
-					cout << "ELSE else" << endl;
-				}
-				else if(token.lexeme == "while") {
-					cout << "WHILE while" << endl;
-				}
-				else if(token.lexeme == "println") {
-					cout << "PRINTLN println" << endl;
-				}
-				else if(token.lexeme == "wain") {
-					cout << "WAIN wain" << endl;
-				}
-				else if(token.lexeme == "int") {
-					cout << "INT int" << endl;
-				}
-				else if(token.lexeme == "new") {
-					cout << "NEW new" << endl;
-				}
-				else if(token.lexeme == "delete") {
-					cout << "DELETE delete" << endl;
-				}
-				else if(token.lexeme == "NULL") {
-					cout << "NULL NULL" << endl;
-				}
-				else {
+                if(token.lexeme == "return") {
+                    cout << "RETURN return" << endl;
+                }
+                else if(token.lexeme == "if") {
+                    cout << "IF if" << endl;
+                }
+                else if(token.lexeme == "else") {
+                    cout << "ELSE else" << endl;
+                }
+                else if(token.lexeme == "while") {
+                    cout << "WHILE while" << endl;
+                }
+                else if(token.lexeme == "println") {
+                    cout << "PRINTLN println" << endl;
+                }
+                else if(token.lexeme == "wain") {
+                    cout << "WAIN wain" << endl;
+                }
+                else if(token.lexeme == "int") {
+                    cout << "INT int" << endl;
+                }
+                else if(token.lexeme == "new") {
+                    cout << "NEW new" << endl;
+                }
+                else if(token.lexeme == "delete") {
+                    cout << "DELETE delete" << endl;
+                }
+                else if(token.lexeme == "NULL") {
+                    cout << "NULL NULL" << endl;
+                }
+                else {
                     cout << kindString(token.kind) << " " << token.lexeme << endl;
-				}
+                }
             }
         }
     } catch(string msg) {
